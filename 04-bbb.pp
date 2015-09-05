@@ -1,0 +1,4 @@
+package { 'bigbluebutton':
+  ensure  => installed,
+}
+

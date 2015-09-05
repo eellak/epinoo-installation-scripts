@@ -1,6 +1,18 @@
 
-$epinoo_vhost = 'epinoo.test.noc.ntua.gr'
-$moodle_vhost = 'moodle.test.noc.ntua.gr'
+if ! $epinoo {
+	$epinoo_vhost =  'epinoo.test.noc.ntua.gr'
+}
+else { 
+	$epinoo_vhost = $epinoo
+}
+
+if ! $moodle {
+	$moodle_vhost =  'moodle.test.noc.ntua.gr'
+}
+else { 
+	$moodle_vhost = $moodle
+}
+
 $default_ip = '83.212.119.95'
 
 $epinoo_ip = $default_ip
