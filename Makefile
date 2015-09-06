@@ -18,6 +18,7 @@ mysql:
 
 bbb:
 	- puppet module install puppetlabs/apt
+	puppet apply 00-essentials.pp
 	puppet apply 01-locale.pp
 	puppet apply 02-sources.pp
 	puppet apply 03-ffmpeg.pp
