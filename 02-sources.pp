@@ -76,6 +76,8 @@ apt::source { 'bbb-apt-source':
 #  },
 #}
 
+
+# @TODO evaluate as a possible source of ffmpeg instead of compiling ourselves
 apt::ppa { "ppa:mc3man/trusty-media":
-  ensure  => present,
+  ensure  => absent,
 }
