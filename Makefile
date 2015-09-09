@@ -22,6 +22,10 @@ export FACTER_EPINOO_ROOT=$(FACTER_WWW_ROOT)/$(FACTER_EPINOO)
 export FACTER_MOODLE_ROOT=$(FACTER_WWW_ROOT)/$(FACTER_MOODLE)
 export FACTER_WWW_USER=www-data
 
+
+#epinoo wordpress settings
+export FACTER_EPINOO_DB_PWD=example_password_please_change
+
 all:
 	
 .PHONY: init apache mysql bbb
@@ -51,6 +55,12 @@ bbb:
 	puppet apply 03-ffmpeg.pp
 	#puppet apply 04-bbb.pp
 
-moodle:
+vcsrepo:
 	- puppet module install puppetlabs/vcsrepo
+
+moodle: vcsrepo
 	puppet apply moodle.pp
+
+	
+epinoo: vcsrepo
+	puppet apply epinoo.pp
