@@ -36,7 +36,7 @@ file { $moodle_root:
   ensure  => directory,
   owner   => 'root',
   recurse => true,
-  source  => '/root/moodle/',
+  source  => $moodle_source,
 }
 Vcsrepo[$moodle_source] -> File[$moodle_root]
 

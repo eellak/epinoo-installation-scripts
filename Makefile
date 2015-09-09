@@ -25,6 +25,7 @@ export FACTER_WWW_USER=www-data
 
 #epinoo wordpress settings
 export FACTER_EPINOO_DB_PWD=example_password_please_change
+export FACTER_EPINOO_UNIQUE_PHRASE=please change this unique passphrase
 
 all:
 	
@@ -39,28 +40,30 @@ init:
 	update-rc.d puppet disable
 	puppet apply basics.pp
 
-apache:
+puppet_modules:
+	- puppet module install puppetlabs/mysql
 	- puppet module install puppetlabs/apache
+	- puppet module install puppetlabs/apt
+	- puppet module install puppetlabs/vcsrepo
+	touch puppet_modules
+
+apache: puppet_modules
 	puppet apply apache.pp
 
-mysql:
-	- puppet module install puppetlabs/mysql
+mysql: puppet_modules
 	puppet apply mysql.pp
 
-bbb:
-	- puppet module install puppetlabs/apt
+bbb: puppet_modules
 	puppet apply 00-essentials.pp
 	puppet apply 01-locale.pp
 	puppet apply 02-sources.pp
 	puppet apply 03-ffmpeg.pp
 	#puppet apply 04-bbb.pp
 
-vcsrepo:
-	- puppet module install puppetlabs/vcsrepo
-
-moodle: vcsrepo
+moodle: puppet_modules
 	puppet apply moodle.pp
 
 	
-epinoo: vcsrepo
+epinoo: puppet_modules
+	install wp-config.php.erb /etc/puppet/templates/
 	puppet apply epinoo.pp

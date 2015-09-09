@@ -14,6 +14,16 @@ mysql::db { 'epinoo':
   grant    => ['all'],
 }
 
+file { "$epinoo_root/wp-config.php":
+  ensure => present,
+  content => template('wp-config.php.erb')
+}
 
+file { $epinoo_root:
+  ensure  => directory,
+  owner   => 'root',
+  recurse => true,
+  source  => $epinoo_source,
+}
 
-
+Vcsrepo[$epinoo_source] -> File[$epinoo_root] -> File["$epinoo_root/wp-config.php"] 
