@@ -22,7 +22,7 @@ file { "$epinoo_root/wp-config.php":
 
 file { $epinoo_root:
   ensure  => directory,
-  owner   => 'root',
+  owner   => $www_user,
   recurse => true,
   source  => $epinoo_source,
 }
