@@ -1,19 +1,21 @@
-vcsrepo { '/root/moodle':
+
+$moodle_source = '/var/tmp/moodle'
+$data_root = '/var/www/moodle-data'
+
+vcsrepo { $moodle_source:
+  
   ensure    => present,
   provider  => git,
   source    => 'git://git.moodle.org/moodle.git',
   revision  => 'MOODLE_29_STABLE',
 }
 
-
 mysql::db { 'moodle':
   user     => 'moodle',
   password => $moodle_db_pwd,
   host     => 'localhost',
-  grant    => ['all privileges'],
+  grant    => ['all'],
 }
-
-$data_root = '/var/www/moodle-data'
 
 file { $data_root:
   ensure  => 'directory',
@@ -21,22 +23,28 @@ file { $data_root:
   mode    => '0644',
 }
 
-#file { $moodle_root:
-#  ensure  => directory,
-#  owner   => 'root',
-#  recurse => true,
-#  source  => '/root/moodle/',
-#}
-
-#Vcsrepo['/root/moodle/'] -> File[$moodle_root]
-
-Mysql::Db['moodle'] -> File['/var/www/moodle-data']
-
-#exec { 'install_moodle':
-#  cwd       => '/root/moodle/admin/cli',
-#  creates => '/root/moodle/config.php',
-#  path      => '/usr/bin',
-#  command   => "php install.php --chmod=0750 --lang=el --wwwroot=http://moodle.test.noc.ntua.gr --dataroot=/var/www/moodle-data --dbuser=moodle --dbpass=example_password_please_change --fullname=FullName --shortname=ShortName --non-interactive --agree-license --adminpass=xxxxx",
+#exec { 'copy_moodle_to_apache':
+#  cwd         => $moodle_source,
+#  command     => 'cp -Rp $moodle_source/* $moodle_root/',
+#  path        => '/bin',
+#  creates     => "$moodle_root/README.txt",
 #  refreshonly => true,
-#  user  => $www_user,
 #}
+#Vcsrepo[$moodle_source] ~> Exec['copy_moodle_to_apache']
+
+file { $moodle_root:
+  ensure  => directory,
+  owner   => 'root',
+  recurse => true,
+  source  => '/root/moodle/',
+}
+Vcsrepo[$moodle_source] -> File[$moodle_root]
+
+Vcsrepo[$moodle_source] -> Mysql::Db['moodle'] -> File[$data_root] -> Exec['install_moodle']
+
+exec { 'install_moodle':
+  cwd       => "$moodle_root/admin/cli",
+  creates   => "$moodle_root/config.php",
+  path      => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  command   => "php install.php --chmod=0750 --lang=el --wwwroot=$moodle_url --dataroot=$data_root --dbuser=moodle --dbpass='$moodle_db_pwd' --fullname='$moodle_fullname' --shortname='$moodle_shortname' --non-interactive --agree-license --adminpass='$moodle_adminpass'",
+}
