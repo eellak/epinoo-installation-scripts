@@ -17,6 +17,7 @@ mysql::db { 'epinoo':
 file { "$epinoo_root/wp-config.php":
   ensure => present,
   content => template('wp-config.php.erb')
+  mode    => '0600',
 }
 
 file { $epinoo_root:
