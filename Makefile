@@ -1,11 +1,16 @@
-export FACTER_EPINOO=epinoo.test.noc.ntua.gr
-export FACTER_MOODLE=moodle.test.noc.ntua.gr
+export FACTER_EPINOO=epinoodev.ellak.gr
+export FACTER_MOODLE=moodledev.ellak.gr
 
 # please change the password here or sypply it as arg
 export FACTER_MOODLE_DB_PWD=example_password_please_change
 export FACTER_DEFAULT_IP=83.212.119.95
 export FACTER_EPINOO_IP=$(FACTER_DEFAULT_IP)
 export FACTER_MOODLE_IP=$(FACTER_DEFAULT_IP)
+
+#certificates for moodle
+export FACTER_MOODLE_SSL_DIR=/etc/apache2/ssl
+export FACTER_MOODLE_SSL_CERT=$(FACTER_MOODLE_SSL_DIR)/$(FACTER_MOODLE).crt
+export FACTER_MOODLE_SSL_KEY=$(FACTER_MOODLE_SSL_DIR)/$(FACTER_MOODLE).key
 
 export FACTER_MOODLE_FULLNAME=This is the full name of the moodle site
 export FACTER_MOODLE_SHORTNAME=Shortname
@@ -17,6 +22,7 @@ export FACTER_MOODLE_ADMINPASS=admin_password_please_change
 #
 export FACTER_MOODLE_URL=http://$(FACTER_MOODLE)
 export FACTER_LISTEN_PORT=80
+export FACTER_LISTEN_SSL_PORT=443
 export FACTER_WWW_ROOT=/var/www
 export FACTER_EPINOO_ROOT=$(FACTER_WWW_ROOT)/$(FACTER_EPINOO)
 export FACTER_MOODLE_ROOT=$(FACTER_WWW_ROOT)/$(FACTER_MOODLE)
