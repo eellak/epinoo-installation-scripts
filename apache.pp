@@ -6,15 +6,20 @@ apache::listen { $listen_port: }
 apache::listen { $listen_ssl_port: }
 
 class {'apache::mod::php': } 
+class {'apache::mod::rewrite': } 
+
 
 apache::vhost { $epinoo:
   ip              => $epinoo_ip,
   port            => 80,
   add_listen      => false,
   docroot         => $epinoo_root,
-  docroot_owner  => $www_user,
+  docroot_owner   => $www_user,
+  override        => ['All'],
+  rewrites        => [{}],
   directories     => { 
-    path => $epinoo_root,
+    allow_override  => ['All'],
+    path            => $epinoo_root,
   }
 }
 
@@ -28,8 +33,11 @@ apache::vhost { "$epinoo-ssl":
   add_listen      => false,
   docroot         => $epinoo_root,
   docroot_owner  => $www_user,
+  override        => ['All'],
+  rewrites        => [{}],
   directories     => { 
-    path => $epinoo_root,
+    allow_override  => ['All'],
+    path            => $epinoo_root,
   }
 }
 
