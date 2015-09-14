@@ -47,4 +47,5 @@ exec { 'install_moodle':
   creates   => "$moodle_root/config.php",
   path      => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
   command   => "php install.php --chmod=0750 --lang=el --wwwroot=$moodle_url --dataroot=$data_root --dbuser=moodle --dbpass='$moodle_db_pwd' --fullname='$moodle_fullname' --shortname='$moodle_shortname' --non-interactive --agree-license --adminpass='$moodle_adminpass'",
+  user      => 'www-data',
 }
