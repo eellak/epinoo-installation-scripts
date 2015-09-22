@@ -39,16 +39,20 @@ apache::vhost { "$epinoo-ssl":
   rewrites        => [{}],
   directories     => [ 
     { 
-    allow_override  => ['All'],
-    path            => $epinoo_root,
+    allow_override        => ['All'],
+    path                  => $epinoo_root,
+    auth_type             => 'Shibboleth',
+    shib_request_settings => { 'requiresession' => 'On' },
+    shib_use_headers      => 'On',
     },
-#    { 
-#    auth_type             => 'Shibboleth',
-#    allow_override        => ['All'],
-#    path                  => "$epinoo_root/secure/",
-#    shib_request_settings => { 'requiresession' => 'On' },
-#    shib_use_headers      => 'On',
-#    },
+    { 
+    auth_type             => 'Shibboleth',
+    allow_override        => ['All'],
+    path                  => "$epinoo_root/secure/",
+    shib_request_settings => { 'requiresession' => 'On' },
+    shib_use_headers      => 'On',
+    require               => 'valid-user',
+    },
   ],
 }
 
@@ -68,7 +72,7 @@ class { 'shibboleth':
   hostname  => $epinoo,
 }
 
-shibboleth::metadata{'federation_metadata':
+shibboleth::metadata{ 'federation_metadata':
   provider_uri  => 'https://aai.grnet.gr/metadata.xml',
   cert_uri      => 'https://aai.grnet.gr/wayf.grnet.gr.crt',
 }
@@ -76,5 +80,6 @@ shibboleth::metadata{'federation_metadata':
 shibboleth::sso { 'federation_sso':
   discoveryURL  => 'https://wayf.grnet.gr',
 }
+
 include shibboleth::backend_cert
 
