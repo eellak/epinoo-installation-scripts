@@ -51,6 +51,7 @@ puppet_modules:
 	- puppet module install puppetlabs/apache
 	- puppet module install puppetlabs/apt
 	- puppet module install puppetlabs/vcsrepo
+	- puppet module install Aethylred/shibboleth
 	touch puppet_modules
 
 apache: puppet_modules

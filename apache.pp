@@ -7,7 +7,7 @@ apache::listen { $listen_ssl_port: }
 
 class {'apache::mod::php': } 
 class {'apache::mod::rewrite': } 
-
+class {'apache::mod::shib':}
 
 apache::vhost { $epinoo:
   ip              => $epinoo_ip,
@@ -17,10 +17,12 @@ apache::vhost { $epinoo:
   docroot_owner   => $www_user,
   override        => ['All'],
   rewrites        => [{}],
-  directories     => { 
+  directories     => [
+    { 
     allow_override  => ['All'],
     path            => $epinoo_root,
-  }
+    },
+  ],
 }
 
 apache::vhost { "$epinoo-ssl":
@@ -35,10 +37,19 @@ apache::vhost { "$epinoo-ssl":
   docroot_owner  => $www_user,
   override        => ['All'],
   rewrites        => [{}],
-  directories     => { 
+  directories     => [ 
+    { 
     allow_override  => ['All'],
     path            => $epinoo_root,
-  }
+    },
+#    { 
+#    auth_type             => 'Shibboleth',
+#    allow_override        => ['All'],
+#    path                  => "$epinoo_root/secure/",
+#    shib_request_settings => { 'requiresession' => 'On' },
+#    shib_use_headers      => 'On',
+#    },
+  ],
 }
 
 apache::vhost { $moodle:
@@ -51,3 +62,19 @@ apache::vhost { $moodle:
     path => $moodle_root,
   }
 }
+
+
+class { 'shibboleth': 
+  hostname  => $epinoo,
+}
+
+shibboleth::metadata{'federation_metadata':
+  provider_uri  => 'https://aai.grnet.gr/metadata.xml',
+  cert_uri      => 'https://aai.grnet.gr/wayf.grnet.gr.crt',
+}
+
+shibboleth::sso { 'federation_sso':
+  discoveryURL  => 'https://wayf.grnet.gr',
+}
+include shibboleth::backend_cert
+
