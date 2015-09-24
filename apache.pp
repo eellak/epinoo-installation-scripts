@@ -44,6 +44,7 @@ apache::vhost { "$epinoo-ssl":
     auth_type             => 'Shibboleth',
     shib_request_settings => { 'requiresession' => 'On' },
     shib_use_headers      => 'On',
+    require               => 'shibboleth',
     },
     { 
     auth_type             => 'Shibboleth',
