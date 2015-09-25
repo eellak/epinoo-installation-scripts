@@ -42,7 +42,7 @@ apache::vhost { "$epinoo-ssl":
     allow_override        => ['All'],
     path                  => $epinoo_root,
     auth_type             => 'Shibboleth',
-    shib_request_settings => { 'requiresession' => 'On' },
+    #shib_request_settings => { 'requiresession' => 'On' },
     shib_use_headers      => 'On',
     require               => 'shibboleth',
     },
