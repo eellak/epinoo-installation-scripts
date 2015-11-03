@@ -75,5 +75,5 @@ epinoo: puppet_modules
 	install wp-config.php.erb /etc/puppet/templates/
 	puppet apply epinoo.pp
 
-make ajenti: puppet_modules
+ajenti: puppet_modules
 	puppet apply ajenti.pp	
