@@ -34,14 +34,14 @@ export FACTER_EPINOO_DB_PWD=example_password_please_change
 export FACTER_EPINOO_UNIQUE_PHRASE=please change this unique passphrase
 
 all:
-	
+
 .PHONY: init apache mysql bbb
 
 test:
 	@env | grep -i facter_
 
 init:
-	apt-get install puppet
+	apt-get install -qq puppet
 	service puppet stop
 	update-rc.d puppet disable
 	puppet apply basics.pp
@@ -74,12 +74,12 @@ bbb: puppet_modules
 moodle: puppet_modules apache mysql
 	puppet apply moodle.pp
 
-	
+
 epinoo: puppet_modules apache mysql
 	install wp-config.php.erb /etc/puppet/templates/
 	puppet apply epinoo.pp
 
 ajenti: puppet_modules
-	puppet apply ajenti.pp	
+	puppet apply ajenti.pp
 
 all: init puppet_modules apache mysql ffmpeg bbb moodle epinoo ajenti
