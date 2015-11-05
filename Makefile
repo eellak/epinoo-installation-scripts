@@ -60,20 +60,26 @@ apache: puppet_modules
 mysql: puppet_modules
 	puppet apply mysql.pp
 
+ffmpeg:
+	ffmpeg.sh
+
 bbb: puppet_modules
+	@echo WARNING: This target will fail if you haven't yet run make ffmpeg to build the ffmpeg .deb package (alternatively, run ffmpeg.sh directly)
 	puppet apply 00-essentials.pp
 	puppet apply 01-locale.pp
 	puppet apply 02-sources.pp
 	puppet apply 03-ffmpeg.pp
 	#puppet apply 04-bbb.pp
 
-moodle: puppet_modules
+moodle: puppet_modules apache mysql
 	puppet apply moodle.pp
 
 	
-epinoo: puppet_modules
+epinoo: puppet_modules apache mysql
 	install wp-config.php.erb /etc/puppet/templates/
 	puppet apply epinoo.pp
 
 ajenti: puppet_modules
 	puppet apply ajenti.pp	
+
+all: init puppet_modules apache mysql ffmpeg bbb moodle epinoo ajenti

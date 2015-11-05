@@ -31,8 +31,8 @@ in the repo directory, replacing `[target]` with an actual target name. It is po
 * FACTER_MOODLE_SSL_DIR: A directory containing the certificate/key pair of the Moodle web site. Defaults to /etc/ssl/ellak. 
 * FACTER_MOODLE_SSL_CERT: Defaults to FACTER_MOODLE_SSL_DIR/ssl.crt, the certificate used by the Moodle vhost.
 * FACTER_MOODLE_SSL_KEY: Defaults to FACTER_MOODLE_SSL_DIR/ssl.key, the private key used by the Moodle vhost. Please take special care not to place this file in a public location.
-*FACTER_MOODLE_FULLNAME: A verbose description of the Moodle web site.
-*FACTER_MOODLE_SHORTNAME: A short description of the Moodle web site.
+* FACTER_MOODLE_FULLNAME: A verbose description of the Moodle web site.
+* FACTER_MOODLE_SHORTNAME: A short description of the Moodle web site.
 * FACTER_MOODLE_ADMINPASS: The administration password of the Moodle website. User should change this to something other than the default.
 * FACTER_MOODLE_URL: Defaults to http://FACTER_MOODLE, the URL of the Moodle website.
 * FACTER_LISTEN_PORT: Defaults to 80, the port number to which the web server listens for HTTP connections.
@@ -61,6 +61,9 @@ Installs a standard Apache HTTPD into the system, customizes the installation ac
 #### mysql
 Install an empty MySQL database server. See the file mysql.pp for more detals.
 
+#### ffmpeg
+Build a Debian package of the FFMPEG software. This will clone a bazaar repo and carry out the build process. Use this before attempting to install bbb.
+
 #### bbb
 Install Big Blue Button. This is a rather complex process, mostly because it involves the creation of an ffmpeg package specialized for this need. See bellow for details.
 
@@ -73,11 +76,15 @@ Install an Epinoo WordPress site into the web server. This essentially downloads
 #### ajenti
 Install and start the [Ajenti Server Admin Panel](http://ajenti.org). The Ajenti Server Admin Panel has its own web server listening on port 8000 and operates independently from the rest of the abovementioned software packages. The user should make subsequent adjustments to the installation by visiting https://[server-hostname]:8000. See ajent.pp for more details.
 
+#### all
+Will apply all the above targets in the correct order. *BEWARE:* This will make a tremendous amount of changes in the host and is probably not what a cautious person would use. 
+
+
 ### Big Blue Button
 
 Due to licensing issues with the ffmpeg codebase, it is not allowed to distribute a binary package of ffmpeg in certain countries. To work around this issue, a small launchpad repo has been created as part of this project to host the description necessary to create an ffmpeg .deb package on the fly. Of course, having created the package once, the procedure need not be repeated again elsewhere, but the .deb package can be freely copied to whatever host needs it. 
 
-To create the package, the script `ffmpeg.sh` is provided as part of the repo. The script will copy the necessary source from the appropriate launchpad bazaar repo and the build the debian package. The necessary compile parameters needed by the other parts of the Big Blue Button have already been set appropriately. Once the ffmpeg.deb package has been created, the bbb Makefile target can be invoked to install it. 
+To create the package, the script `ffmpeg.sh` is provided as part of the repo. The user can either run ffmpeg.sh directly, or issue `make ffmpeg`, which will run the script in exactly the same way. The ffmpeg.sh script will copy the necessary source from the appropriate launchpad bazaar repo and the build the debian package. The necessary compile parameters needed by the other parts of the Big Blue Button have already been set appropriately. Once the ffmpeg.deb package has been created, the bbb Makefile target can be invoked to install it. 
 
 
 
