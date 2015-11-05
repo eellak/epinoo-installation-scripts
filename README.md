@@ -68,10 +68,10 @@ Build a Debian package of the FFMPEG software. This will clone a bazaar repo and
 Install Big Blue Button. This is a rather complex process, mostly because it involves the creation of an ffmpeg package specialized for this need. See bellow for details.
 
 #### moodle
-Install a moodle setup. Will download a Moodle software snapshot from the Moodle repository (git://git.moodle.org/moodle.git) and customize accordingly. The data root of the Moodle installation will belong to FACTER_WWW_USER, see above.
+Install a moodle setup. Will download a Moodle software snapshot from the Moodle repository (git://git.moodle.org/moodle.git) and customize accordingly. The data root of the Moodle installation will belong to FACTER_WWW_USER, see above. The user may have to install via the moodle web interface various other components.
 
 #### epinoo
-Install an Epinoo WordPress site into the web server. This essentially downloads a snaphost of the wordpress codebase, installs it in an appropriate vhost and creates a suitable wp-config.php for the installation. See epinoo.pp for more details.
+Install an Epinoo WordPress site into the web server. This essentially downloads a snaphost of the wordpress codebase, installs it in an appropriate vhost and creates a suitable wp-config.php for the installation. See epinoo.pp for more details. The user may have to install via the wordpress/epinoo web interface various other components.
 
 #### ajenti
 Install and start the [Ajenti Server Admin Panel](http://ajenti.org). The Ajenti Server Admin Panel has its own web server listening on port 8000 and operates independently from the rest of the abovementioned software packages. The user should make subsequent adjustments to the installation by visiting https://[server-hostname]:8000. See ajent.pp for more details.
