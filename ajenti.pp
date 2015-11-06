@@ -15,4 +15,5 @@ apt::source { 'ajenti-repo':
 ->
 package { 'ajenti':
   ensure  => installed,
+  require => Exec['apt_update'],
 }
