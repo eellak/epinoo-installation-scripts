@@ -1,4 +1,3 @@
-
 $moodle_source = '/var/tmp/moodle'
 $data_root = '/var/www/moodle-data'
 
@@ -34,10 +33,11 @@ file { $data_root:
 
 file { $moodle_root:
   ensure  => directory,
-  owner   => 'root',
+  owner   => $www_user,
   recurse => true,
   source  => $moodle_source,
 }
+
 Vcsrepo[$moodle_source] -> File[$moodle_root]
 
 Vcsrepo[$moodle_source] -> Mysql::Db['moodle'] -> File[$data_root] -> Exec['install_moodle']
