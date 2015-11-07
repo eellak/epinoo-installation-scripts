@@ -17,7 +17,7 @@
     - [ffmpeg](#ffmpeg)
     - [bbb](#bbb)
     - [moodle](#moodle)
-    - [epinoo](#epinoo)
+    - [wordpress](#wordpress)
     - [ajenti](#ajenti)
     - [all](#all)
   - [Big Blue Button](#big-blue-button)
@@ -138,7 +138,7 @@ other targets. Documented here for posterity.
 
 ### apache
 Installs a standard Apache HTTPD into the system, customizes the installation
-accordingly for Moodle and Epinoo. Also setup a Shibboleth SP pointing to
+accordingly for Moodle and wordpress. Also setup a Shibboleth SP pointing to
 `wayf.grnet.gr` as its WAYF. To make this Shibboleth SP functional, its
 Metadata should be published in the federation. Furthermore, the IdPs in the
 federation should be accordingly setup to release eppn and mail to this SP.
@@ -163,10 +163,10 @@ The data root of the Moodle installation will belong to FACTER_WWW_USER, see
 above. The user may have to install via the moodle web interface various other
 components.
 
-### epinoo
+### wordpress
 Install an Epinoo WordPress site into the web server. This essentially downloads
 a snaphost of the wordpress codebase, installs it in an appropriate vhost and
-creates a suitable wp-config.php for the installation. See epinoo.pp for more
+creates a suitable wp-config.php for the installation. See wordpress.pp for more
 details. The user may have to install via the wordpress/epinoo web interface
 various other components.
 
