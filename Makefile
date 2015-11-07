@@ -55,6 +55,9 @@ puppet_modules:
 	- puppet module install Aethylred/shibboleth
 	touch puppet_modules
 
+php: puppet_modules
+	puppet apply php.pp
+
 apache: puppet_modules
 	puppet apply apache.pp
 
@@ -72,10 +75,10 @@ bbb: puppet_modules
 	puppet apply 03-ffmpeg.pp
 	#puppet apply 04-bbb.pp
 
-moodle: puppet_modules apache mysql
+moodle: puppet_modules php apache mysql
 	puppet apply moodle.pp
 
-wordpress: puppet_modules apache mysql
+wordpress: puppet_modules php apache mysql
 	install wp-config.php.erb /etc/puppet/templates/
 	puppet apply wordpress.pp
 
