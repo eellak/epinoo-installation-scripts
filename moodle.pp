@@ -2,7 +2,6 @@ $moodle_source = '/var/tmp/moodle'
 $data_root = '/var/www/moodle-data'
 
 vcsrepo { $moodle_source:
-
   ensure    => present,
   provider  => git,
   source    => 'git://git.moodle.org/moodle.git',
