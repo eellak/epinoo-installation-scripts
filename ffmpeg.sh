@@ -1,6 +1,6 @@
-#!/bin/sh - 
+#!/bin/sh -
 
-sudo apt-get install build-essential git-core checkinstall yasm texi2html libvorbis-dev libx11-dev libvpx-dev libxfixes-dev zlib1g-dev pkg-config netcat libncurses5-dev
+sudo apt-get install -qq build-essential git-core checkinstall yasm texi2html libvorbis-dev libx11-dev libvpx-dev libxfixes-dev zlib1g-dev pkg-config netcat libncurses5-dev
 
 FFMPEG_VERSION=2.3.3
 
@@ -18,4 +18,4 @@ cd src
 
 bzr branch lp:~aduitsis/+junk/ffmpeg
 cd ffmpeg
-bzr builddeb -- -us -uc 
+bzr builddeb -- -us -uc
