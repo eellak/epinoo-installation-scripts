@@ -2,6 +2,7 @@ export FACTER_EPINOO=epinoodev.ellak.gr
 export FACTER_MOODLE=moodledev.ellak.gr
 
 # please change the password here or sypply it as arg
+export FACTER_DB_ROOT_PASSWD=r00tp@ssw0rd
 export FACTER_MOODLE_DB_PWD=example_password_please_change
 export FACTER_DEFAULT_IP=83.212.119.95
 export FACTER_EPINOO_IP=$(FACTER_DEFAULT_IP)
