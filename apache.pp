@@ -34,7 +34,7 @@ apache::vhost { "$wordpress-ssl":
   port            => 443,
   add_listen      => false,
   docroot         => $wordpress_root,
-  docroot_owner  => $www_user,
+  docroot_owner   => $www_user,
   override        => ['All'],
   rewrites        => [{}],
   directories     => [
@@ -62,7 +62,7 @@ apache::vhost { $moodle:
   port            => 80,
   add_listen      => false,
   docroot         => $moodle_root,
-  docroot_owner  => 'root',
+  docroot_owner   => $www_user,
   directories     => {
     path => $moodle_root,
   }
