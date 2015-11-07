@@ -67,13 +67,13 @@ mysql: puppet_modules
 ffmpeg:
 	ffmpeg.sh
 
-bbb: puppet_modules
+bbb: puppet_modules ffmpeg
 	@echo WARNING: This target will fail if you haven't yet run make ffmpeg to build the ffmpeg .deb package (alternatively, run ffmpeg.sh directly)
 	puppet apply 00-essentials.pp
 	puppet apply 01-locale.pp
 	puppet apply 02-sources.pp
 	puppet apply 03-ffmpeg.pp
-	#puppet apply 04-bbb.pp
+	puppet apply 04-bbb.pp
 
 moodle: puppet_modules php apache mysql
 	puppet apply moodle.pp
