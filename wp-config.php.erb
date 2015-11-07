@@ -1,25 +1,25 @@
 <?php
 
-# 
-# this file was borrowed from 
+#
+# this file was borrowed from
 # https://www.digitalocean.com/community/tutorials/how-to-create-a-puppet-module-to-automate-wordpress-installation-on-ubuntu-14-04
 #
 
-define('DB_NAME', 'epinoo');
+define('DB_NAME', 'wordpress');
 define('DB_USER', 'epinoo');
-define('DB_PASSWORD', '<%= @epinoo_db_pwd %>');
+define('DB_PASSWORD', '<%= @wordpress_db_pwd %>');
 define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
-define('AUTH_KEY',         '<%= @epinoo_unique_phrase %>');
-define('SECURE_AUTH_KEY',  '<%= @epinoo_unique_phrase %>');
-define('LOGGED_IN_KEY',    '<%= @epinoo_unique_phrase %>');
-define('NONCE_KEY',        '<%= @epinoo_unique_phrase %>');
-define('AUTH_SALT',        '<%= @epinoo_unique_phrase %>');
-define('SECURE_AUTH_SALT', '<%= @epinoo_unique_phrase %>');
-define('LOGGED_IN_SALT',   '<%= @epinoo_unique_phrase %>');
-define('NONCE_SALT',       '<%= @epinoo_unique_phrase %>');
+define('AUTH_KEY',         '<%= @wordpress_unique_phrase %>');
+define('SECURE_AUTH_KEY',  '<%= @wordpress_unique_phrase %>');
+define('LOGGED_IN_KEY',    '<%= @wordpress_unique_phrase %>');
+define('NONCE_KEY',        '<%= @wordpress_unique_phrase %>');
+define('AUTH_SALT',        '<%= @wordpress_unique_phrase %>');
+define('SECURE_AUTH_SALT', '<%= @wordpress_unique_phrase %>');
+define('LOGGED_IN_SALT',   '<%= @wordpress_unique_phrase %>');
+define('NONCE_SALT',       '<%= @wordpress_unique_phrase %>');
 
 $table_prefix  = 'wp_';
 
