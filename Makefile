@@ -65,7 +65,7 @@ mysql: puppet_modules
 	puppet apply mysql.pp
 
 ffmpeg:
-	ffmpeg.sh
+	sh ffmpeg.sh
 
 bbb: puppet_modules ffmpeg
 	@echo WARNING: This target will fail if you haven't yet run make ffmpeg to build the ffmpeg .deb package (alternatively, run ffmpeg.sh directly)
