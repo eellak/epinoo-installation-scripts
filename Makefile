@@ -8,7 +8,7 @@ export FACTER_EPINOO_IP=$(FACTER_DEFAULT_IP)
 export FACTER_MOODLE_IP=$(FACTER_DEFAULT_IP)
 
 #certificates for moodle
-export FACTER_MOODLE_SSL_DIR=/etc/ssl/ellak/
+export FACTER_MOODLE_SSL_DIR=/etc/ssl/ellak
 export FACTER_MOODLE_SSL_CERT=$(FACTER_MOODLE_SSL_DIR)/ssl.crt
 export FACTER_MOODLE_SSL_KEY=$(FACTER_MOODLE_SSL_DIR)/ssl.key
 
