@@ -3,6 +3,7 @@ package { [
   'wget',
   'git',
   'subversion',
+  'bzr',
   'vim',
   'make',
   'tcpdump',
