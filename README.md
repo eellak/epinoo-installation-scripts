@@ -100,11 +100,11 @@ make [target] parameter1=value1 parameter2=value2
 
 | Variable | Description |
 | -------- | ----------- |
-| `FACTER_EPINOO` | The web site name (vhost in apache) of the epinoo website, defaults to epinoodev.ellak.gr |
+| `FACTER_WORDPRESS` | The web site name (vhost in apache) of the epinoo website, defaults to epinoodev.ellak.gr |
 | `FACTER_MOODLE` |  The web site name (vhost in apache) of the moodle website, default to moodledev.ellak.gr |
 | `FACTER_MOODLE_DB_PWD` | A password to set for the Moodle MySQL account. User should change this to something other than the default. |
 | `FACTER_DEFAULT_IP` | The IP address to which the apache web server listens. |
-| `FACTER_EPINOO_IP` | Defaults to `FACTER_DEFAULT_IP`, the IP address to which the Epinoo vhost listens. It is possible to have the Epinoo and the Moodle web sites listen to different addresses. |
+| `FACTER_WORDPRESS_IP` | Defaults to `FACTER_DEFAULT_IP`, the IP address to which the Epinoo vhost listens. It is possible to have the Epinoo and the Moodle web sites listen to different addresses. |
 | `FACTER_MOODLE_IP` | See above, the IP address to which the Moodle vhost listens. Defaults to FACTER_DEFAULT_IP. |
 | `FACTER_MOODLE_SSL_DIR` | A directory containing the certificate/key pair of the Moodle web site. Defaults to `/etc/ssl/ellak` |
 | `FACTER_MOODLE_SSL_CERT` | Defaults to `FACTER_MOODLE_SSL_DIR/ssl.crt`, the certificate used by the Moodle vhost. |
@@ -116,11 +116,11 @@ make [target] parameter1=value1 parameter2=value2
 | `FACTER_LISTEN_PORT` | Defaults to 80, the port number to which the web server listens for HTTP connections. |
 | `FACTER_LISTEN_SSL_PORT` | Defaults to 443, the port number to which the web server listens for HTTPS connections. |
 | `FACTER_WWW_ROOT` | Defaults to `/var/www`, the root directory of the web server. |
-| `FACTER_EPINOO_ROOT` | Defaults to `FACTER_WWW_ROOT/FACTER_EPINOO`, the root directory of the Epinoo vhost. |
+| `FACTER_WORDPRESS_ROOT` | Defaults to `FACTER_WWW_ROOT/FACTER_WORDPRESS`, the root directory of the Epinoo vhost. |
 | `FACTER_MOODLE_ROOT` | Defaults to `FACTER_WWW_ROOT/FACTER_MOODLE`, the root directory of the Moodle vhost. |
 | `FACTER_WWW_USER` | Defaults to `www-data` (default web server user in Ubuntu), the user which has permissions to read and write the certain www directories, see moodle target bellow. |
-| `FACTER_EPINOO_DB_PWD` | The password for the Epinoo database in the MySQL server. User should change this to something other than the default. |
-| `FACTER_EPINOO_UNIQUE_PHRASE` | A unique passphrase for the Epinoo website administration. User should change this to something other than the default. |
+| `FACTER_WORDPRESS_DB_PWD` | The password for the Epinoo database in the MySQL server. User should change this to something other than the default. |
+| `FACTER_WORDPRESS_UNIQUE_PHRASE` | A unique passphrase for the Epinoo website administration. User should change this to something other than the default. |
 
 ## Makefile Targets
 
@@ -163,12 +163,24 @@ The data root of the Moodle installation will belong to FACTER_WWW_USER, see
 above. The user may have to install via the moodle web interface various other
 components.
 
+Example run:
+
+```
+make moodle FACTER_WORDPRESS=wp.example.com FACTER_MOODLE=moodle.example.com FACTER_DEFAULT_IP=1.2.3.4
+```
+
 ### wordpress
 Install an Epinoo WordPress site into the web server. This essentially downloads
 a snaphost of the wordpress codebase, installs it in an appropriate vhost and
 creates a suitable wp-config.php for the installation. See wordpress.pp for more
 details. The user may have to install via the wordpress/epinoo web interface
 various other components.
+
+Example run:
+
+```
+make wordpress FACTER_WORDPRESS=wp.example.com FACTER_MOODLE=moodle.example.com FACTER_DEFAULT_IP=1.2.3.4
+```
 
 ### ajenti
 Install and start the [Ajenti Server Admin Panel](http://ajenti.org).
