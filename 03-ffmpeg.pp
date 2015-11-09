@@ -1,11 +1,11 @@
 exec { 'ffmpeg_sh':
   timeout => 0,
   command => '/root/epinoo-installation-scripts/ffmpeg.sh',
-  creates => 'src/ffmpeg_2.3.3-1_amd64.deb',
+  creates => '/root/spinoo-installation-scripts/src/ffmpeg_2.3.3-1_amd64.deb',
 }
 
 package { "ffmpeg":
   provider => dpkg,
   ensure   => present,
-  source   => "src/ffmpeg_2.3.3-1_amd64.deb",
+  source   => "/root/epinoo-installation-scripts/src/ffmpeg_2.3.3-1_amd64.deb",
 }
