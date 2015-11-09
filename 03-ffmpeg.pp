@@ -5,7 +5,7 @@ exec { 'ffmpeg_sh':
 }
 
 package { "ffmpeg":
- provider => dpkg,
- ensure   => installed,
- source   => "src/ffmpeg_2.3.3-1_amd64.deb",
+  provider => dpkg,
+  ensure   => present,
+  source   => "src/ffmpeg_2.3.3-1_amd64.deb",
 }
