@@ -13,6 +13,11 @@ export FACTER_MOODLE_SSL_DIR=/etc/ssl/ellak
 export FACTER_MOODLE_SSL_CERT=$(FACTER_MOODLE_SSL_DIR)/ssl.crt
 export FACTER_MOODLE_SSL_KEY=$(FACTER_MOODLE_SSL_DIR)/ssl.key
 
+#certificates for wordpress
+export FACTER_WORDPRESS_SSL_DIR=/etc/ssl/ellak
+export FACTER_WORDPRESS_SSL_CERT=$(FACTER_WORDPRESS_SSL_DIR)/ssl.crt
+export FACTER_WORDPRESS_SSL_KEY=$(FACTER_WORDPRESS_SSL_DIR)/ssl.key
+
 export FACTER_MOODLE_FULLNAME=This is the full name of the moodle site
 export FACTER_MOODLE_SHORTNAME=Shortname
 # also, this should be changed to something else as well

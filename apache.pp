@@ -28,8 +28,8 @@ apache::vhost { $wordpress:
 apache::vhost { "$wordpress-ssl":
   vhost_name      => $wordpress,
   ssl             => true,
-  ssl_cert        => $moodle_ssl_cert,
-  ssl_key         => $moodle_ssl_key,
+  ssl_cert        => $wordpress_ssl_cert,
+  ssl_key         => $wordpress_ssl_key,
   ip              => $wordpress_ip,
   port            => 443,
   add_listen      => false,
@@ -63,6 +63,22 @@ apache::vhost { $moodle:
   add_listen      => false,
   docroot         => $moodle_root,
   docroot_owner   => $www_user,
+  directories     => {
+    path => $moodle_root,
+  }
+}
+apache::vhost { "$moodle-ssl":
+  vhost_name      => $moodle,
+  ssl             => true,
+  ssl_cert        => $moodle_ssl_cert,
+  ssl_key         => $moodle_ssl_key,
+  ip              => $moodle_ip,
+  port            => 443,
+  add_listen      => false,
+  docroot         => $moodle_root,
+  docroot_owner   => $www_user,
+  override        => ['All'],
+  rewrites        => [{}],
   directories     => {
     path => $moodle_root,
   }
