@@ -84,6 +84,25 @@ apache::vhost { "$moodle-ssl":
   }
 }
 
+apache::vhost { "$moodle-ssl":
+  vhost_name      => $moodle,
+  ssl             => true,
+  ssl_cert        => $moodle_ssl_cert,
+  ssl_key         => $moodle_ssl_key,
+  ip              => $moodle_ip,
+  port            => 443,
+  add_listen      => false,
+  docroot         => $moodle_root,
+  docroot_owner   => $www_user,
+  override        => ['All'],
+  rewrites        => [{}],
+  directories     => [
+    {
+    allow_override  => ['All'],
+    path            => $moodle_root,
+    },
+  ],
+}
 
 class { 'shibboleth':
   hostname  => $wordpress,

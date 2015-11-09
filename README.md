@@ -112,7 +112,7 @@ make [target] parameter1=value1 parameter2=value2
 | `FACTER_MOODLE_FULLNAME` | A verbose description of the Moodle web site. |
 | `FACTER_MOODLE_SHORTNAME` | A short description of the Moodle web site. |
 | `FACTER_MOODLE_ADMINPASS` | The administration password of the Moodle website. User should change this to something other than the default. |
-| `FACTER_MOODLE_URL` | Defaults to `http://FACTER_MOODLE`, the URL of the Moodle website. |
+| `FACTER_MOODLE_URL` | Defaults to `https://FACTER_MOODLE`, the URL of the Moodle website. It assumes there are existing ssl keys on the server. |
 | `FACTER_LISTEN_PORT` | Defaults to 80, the port number to which the web server listens for HTTP connections. |
 | `FACTER_LISTEN_SSL_PORT` | Defaults to 443, the port number to which the web server listens for HTTPS connections. |
 | `FACTER_WWW_ROOT` | Defaults to `/var/www`, the root directory of the web server. |
@@ -153,15 +153,27 @@ and carry out the build process. Use this before attempting to install bbb.
 
 ### bbb
 Install Big Blue Button. This is a rather complex process, mostly because it
-involves the creation of an ffmpeg package specialized for this need. See
-bellow for details.
+involves the creation of an ffmpeg package specialized for this need.
+
+Run with:
+
+```
+make bbb
+```
 
 ### moodle
 Install a moodle setup. Will download a Moodle software snapshot from the
 Moodle repository (`git://git.moodle.org/moodle.git`) and customize accordingly.
-The data root of the Moodle installation will belong to FACTER_WWW_USER, see
+The data root of the Moodle installation will belong to `FACTER_WWW_USER`, see
 above. The user may have to install via the moodle web interface various other
 components.
+
+It is assumed that the default url scheme is under HTTPS. If you want to
+change that behaviour you will have to change the `FACTER_MOODLE_URL`
+parameter.
+
+**Note:** The parameter `FACTER_WORDPRESS` needs to be set as well since
+    the apache manifest depends on it. Will need to be fixed in the future.
 
 Example run:
 
@@ -175,6 +187,9 @@ a snaphost of the wordpress codebase, installs it in an appropriate vhost and
 creates a suitable wp-config.php for the installation. See wordpress.pp for more
 details. The user may have to install via the wordpress/epinoo web interface
 various other components.
+
+**Note:** The parameter `FACTER_MOODLE` needs to be set as well since
+    the apache manifest depends on it. Will need to be fixed in the future.
 
 Example run:
 
