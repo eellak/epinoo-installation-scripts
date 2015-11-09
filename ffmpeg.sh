@@ -5,7 +5,7 @@ sudo apt-get install -qq build-essential git-core checkinstall yasm texi2html li
 FFMPEG_VERSION=2.3.3
 
 mkdir src
-cd src
+pushd src
 #if [ ! -d "ffmpeg-${FFMPEG_VERSION}" ]; then
 #  sudo wget "http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2"
 #  sudo tar -xjf "ffmpeg-${FFMPEG_VERSION}.tar.bz2"
@@ -17,5 +17,8 @@ cd src
 #sudo checkinstall --pkgname=ffmpeg --pkgversion="5:${FFMPEG_VERSION}" --backup=no --deldoc=yes --default
 
 bzr branch lp:~aduitsis/+junk/ffmpeg
-cd ffmpeg
+pushd ffmpeg
 bzr builddeb -- -us -uc
+popd
+
+popd
