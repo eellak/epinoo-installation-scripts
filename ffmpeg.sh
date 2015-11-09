@@ -1,6 +1,6 @@
 #!/bin/sh -
 
-sudo apt-get install -qq build-essential git-core checkinstall yasm texi2html libvorbis-dev libx11-dev libvpx-dev libxfixes-dev zlib1g-dev pkg-config netcat libncurses5-dev
+sudo apt-get install -qq build-essential git-core checkinstall yasm texi2html libvorbis-dev libx11-dev libvpx-dev libxfixes-dev zlib1g-dev pkg-config netcat libncurses5-dev dh-make bzr-builddeb yasm autotools-dev
 
 FFMPEG_VERSION=2.3.3
 
