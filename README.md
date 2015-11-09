@@ -153,8 +153,13 @@ and carry out the build process. Use this before attempting to install bbb.
 
 ### bbb
 Install Big Blue Button. This is a rather complex process, mostly because it
-involves the creation of an ffmpeg package specialized for this need. See
-bellow for details.
+involves the creation of an ffmpeg package specialized for this need.
+
+Run with:
+
+```
+make bbb
+```
 
 ### moodle
 Install a moodle setup. Will download a Moodle software snapshot from the
