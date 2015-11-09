@@ -65,10 +65,9 @@ mysql: puppet_modules
 	puppet apply mysql.pp
 
 ffmpeg:
-	sh ffmpeg.sh
+	bash ffmpeg.sh
 
-bbb: puppet_modules ffmpeg
-	@echo WARNING: This target will fail if you haven't yet run make ffmpeg to build the ffmpeg .deb package (alternatively, run ffmpeg.sh directly)
+bbb: puppet_modules
 	puppet apply 00-essentials.pp
 	puppet apply 01-locale.pp
 	puppet apply 02-sources.pp
@@ -85,4 +84,4 @@ wordpress: puppet_modules php apache mysql
 ajenti: puppet_modules
 	puppet apply ajenti.pp
 
-all: init puppet_modules apache mysql ffmpeg bbb moodle wordpress ajenti
+all: init puppet_modules apache mysql bbb moodle wordpress ajenti
