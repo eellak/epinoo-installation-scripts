@@ -112,7 +112,7 @@ make [target] parameter1=value1 parameter2=value2
 | `FACTER_MOODLE_FULLNAME` | A verbose description of the Moodle web site. |
 | `FACTER_MOODLE_SHORTNAME` | A short description of the Moodle web site. |
 | `FACTER_MOODLE_ADMINPASS` | The administration password of the Moodle website. User should change this to something other than the default. |
-| `FACTER_MOODLE_URL` | Defaults to `https://FACTER_MOODLE`, the URL of the Moodle website. It assumes there are existing ssl keys on the server. |
+| `FACTER_MOODLE_URL` | Defaults to `http://FACTER_MOODLE`, the URL of the Moodle website. It assumes there are existing ssl keys on the server. |
 | `FACTER_LISTEN_PORT` | Defaults to 80, the port number to which the web server listens for HTTP connections. |
 | `FACTER_LISTEN_SSL_PORT` | Defaults to 443, the port number to which the web server listens for HTTPS connections. |
 | `FACTER_WWW_ROOT` | Defaults to `/var/www`, the root directory of the web server. |
@@ -121,6 +121,7 @@ make [target] parameter1=value1 parameter2=value2
 | `FACTER_WWW_USER` | Defaults to `www-data` (default web server user in Ubuntu), the user which has permissions to read and write the certain www directories, see moodle target bellow. |
 | `FACTER_WORDPRESS_DB_PWD` | The password for the Epinoo database in the MySQL server. User should change this to something other than the default. |
 | `FACTER_WORDPRESS_UNIQUE_PHRASE` | A unique passphrase for the Epinoo website administration. User should change this to something other than the default. |
+| `FACTER_FFMPEG_VERSION` | The current supported ffmpeg version by BBB. |
 
 ## Makefile Targets
 
@@ -151,6 +152,14 @@ Install an empty MySQL database server. See the file mysql.pp for more detals.
 Build a Debian package of the FFMPEG software. This will clone a bazaar repo
 and carry out the build process. Use this before attempting to install bbb.
 
+An ffmpeg precompiled package is provided in the `src/` directory. To build a
+newer version of ffmpeg just change the `FACTER_FFMPEG_VERSION` variable.
+
+Check BBB's [official documentation][bbbffmpeg] to see what the current
+supported version is.
+
+**NOTE:** The ffmpeg binary is distributed under the [GPLv2 license][ffmpeglic].
+
 ### bbb
 Install Big Blue Button. This is a rather complex process, mostly because it
 involves the creation of an ffmpeg package specialized for this need.
@@ -160,6 +169,8 @@ Run with:
 ```
 make bbb
 ```
+
+Read more below at [Big Blue Button](#big-blue-button).
 
 ### moodle
 Install a moodle setup. Will download a Moodle software snapshot from the
@@ -197,12 +208,25 @@ Example run:
 make wordpress FACTER_WORDPRESS=wp.example.com FACTER_MOODLE=moodle.example.com FACTER_DEFAULT_IP=1.2.3.4
 ```
 
+After the initial installation completes, visit your wordpress url to provide
+some final details to install.
+
 ### ajenti
 Install and start the [Ajenti Server Admin Panel](http://ajenti.org).
 The Ajenti Server Admin Panel has its own web server listening on port 8000
 and operates independently from the rest of the abovementioned software
-packages. The user should make subsequent adjustments to the installation by
-visiting https://[server-hostname]:8000. See ajent.pp for more details.
+packages.
+
+Run:
+
+```
+make ajenti
+```
+
+The user should make subsequent adjustments to the installation by visiting
+https://[server-hostname]:8000. See ajent.pp for more details.
+
+Default username is `root` and password is the password of the root system user.
 
 ### all
 Will apply all the above targets in the correct order. *BEWARE:* This will make
@@ -211,6 +235,8 @@ person would use.
 
 
 ## Big Blue Button
+
+### ffmpeg issues
 
 Due to licensing issues with the ffmpeg codebase, it is not allowed to
 distribute a binary package of ffmpeg in certain countries. To work around this
@@ -226,3 +252,12 @@ necessary source from the appropriate launchpad bazaar repo and the build the
 debian package. The necessary compile parameters needed by the other parts of
 the Big Blue Button have already been set appropriately. Once the ffmpeg.deb
 package has been created, the bbb Makefile target can be invoked to install it.
+
+### Further configuration
+
+The installation of BBB is the basic one. For further configuration read the
+official documentation from [this][bbb-install] step onwards.
+
+[bbb-install]: http://docs.bigbluebutton.org/install/install.html#6-install-api-demos
+[bbbffmpeg]: http://docs.bigbluebutton.org/install/install.html#4-install-ffmpeg
+[ffmpeglic]: https://www.ffmpeg.org/legal.html

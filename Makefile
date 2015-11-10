@@ -25,7 +25,7 @@ export FACTER_MOODLE_ADMINPASS=admin_password_please_change
 
 # shoulnd't be needed to change those:
 #
-export FACTER_MOODLE_URL=https://$(FACTER_MOODLE)
+export FACTER_MOODLE_URL=http://$(FACTER_MOODLE)
 export FACTER_LISTEN_PORT=80
 export FACTER_LISTEN_SSL_PORT=443
 export FACTER_WWW_ROOT=/var/www
