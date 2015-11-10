@@ -23,7 +23,6 @@ export FACTER_MOODLE_SHORTNAME=Shortname
 # also, this should be changed to something else as well
 export FACTER_MOODLE_ADMINPASS=admin_password_please_change
 
-
 # shoulnd't be needed to change those:
 #
 export FACTER_MOODLE_URL=https://$(FACTER_MOODLE)
@@ -34,10 +33,12 @@ export FACTER_WORDPRESS_ROOT=$(FACTER_WWW_ROOT)/$(FACTER_WORDPRESS)
 export FACTER_MOODLE_ROOT=$(FACTER_WWW_ROOT)/$(FACTER_MOODLE)
 export FACTER_WWW_USER=www-data
 
-
 #epinoo wordpress settings
 export FACTER_WORDPRESS_DB_PWD=example_password_please_change
 export FACTER_WORDPRESS_UNIQUE_PHRASE=please change this unique passphrase
+
+# set the ffmpeg version
+export FACTER_FFMPEG_VERSION=2.3.3
 
 all:
 
