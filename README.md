@@ -5,6 +5,7 @@
 - [Epinoo Installation Manifests](#epinoo-installation-manifests)
   - [Intro](#intro)
   - [Automation Manifests](#automation-manifests)
+  - [Assumptions](#assumptions)
   - [Preinstallation](#preinstallation)
   - [Makefile](#makefile)
   - [Makefile Parameters](#makefile-parameters)
@@ -21,6 +22,8 @@
     - [ajenti](#ajenti)
     - [all](#all)
   - [Big Blue Button](#big-blue-button)
+    - [ffmpeg issues](#ffmpeg-issues)
+    - [Further configuration](#further-configuration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -56,7 +59,14 @@ The modular nature of this setup as opposed to a monolithic installation script,
 allows one to easily choose which parts of the installation to carry out.
 Hereafter is given an outline of the various targets comprising the Makefile.
 
-This was tested on Ubuntu 14.04.
+## Assumptions
+
+OS distribution: **Ubuntu 14.04**
+
+Big Blue Button must be installed in its own server due to requirements
+constraints. Moodle and wordpress can be install in the same server.
+
+It is assumed that the working directory is `/root/epinoo-installation-scripts/`.
 
 ## Preinstallation
 
@@ -70,6 +80,7 @@ Then, on the server where the platforms will be installed, clone this
 repository:
 
 ```
+sudo -i
 git clone https://github.com/eellak/epinoo-installation-scripts.git
 cd epinoo-installation-scripts
 ```
