@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-FFMPEG_VERSION=2.3.3
+FFMPEG_VERSION=$(FACTER_FFMPEG_VERSION)
 
 [ -d src/ ] || mkdir src
 
