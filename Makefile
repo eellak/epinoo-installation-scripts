@@ -65,6 +65,7 @@ php: puppet_modules
 	puppet apply php.pp
 
 apache: puppet_modules
+	install attribute-map.xml.erb /etc/puppet/templates/
 	puppet apply apache.pp
 
 mysql: puppet_modules

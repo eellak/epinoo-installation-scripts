@@ -108,6 +108,20 @@ class { 'shibboleth':
   hostname  => $wordpress,
 }
 
+file { '/etc/shibboleth/attribute-map.xml':
+  ensure  => present,
+  content => template('attribute-map.xml.erb'),
+}
+
+# This is a small hack to make sure the attribute map was changed.
+# Put the attribute-map.xml template after installing shibboleth, 
+# to ensure that everything is there beforehand. But, after putting 
+# attribute-map.xml in its place, notify the shibd service so as to 
+# restart the shibd daemon. The Service['shibd'] is in  
+# puppet-shibboleth/manifests/init.pp
+
+Class['shibboleth'] -> File['/etc/shibboleth/attribute-map.xml'] ~> Service['shibd']
+
 shibboleth::metadata{ 'federation_metadata':
   provider_uri  => 'https://aai.grnet.gr/metadata.xml',
   cert_uri      => 'https://aai.grnet.gr/wayf.grnet.gr.crt',
