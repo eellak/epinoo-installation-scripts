@@ -165,6 +165,13 @@ and carry out the build process. Use this before attempting to install bbb.
 
 An ffmpeg precompiled package is provided in the `src/` directory. To build a
 newer version of ffmpeg just change the `FACTER_FFMPEG_VERSION` variable.
+By default version 2.3.3 is used which is the one upstream suggests.
+
+Run with:
+
+```
+make ffmpeg
+```
 
 Check BBB's [official documentation][bbbffmpeg] to see what the current
 supported version is.

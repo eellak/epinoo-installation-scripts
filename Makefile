@@ -70,8 +70,9 @@ apache: puppet_modules
 mysql: puppet_modules
 	puppet apply mysql.pp
 
-ffmpeg:
-	bash ffmpeg.sh
+ffmpeg: puppet_modules
+	puppet apply 00-essentials.pp
+	puppet apply 03-ffmpeg.pp
 
 bbb: puppet_modules
 	puppet apply 00-essentials.pp
