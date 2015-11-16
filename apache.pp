@@ -67,22 +67,22 @@ apache::vhost { $moodle:
     path => $moodle_root,
   }
 }
-apache::vhost { "$moodle-ssl":
-  vhost_name      => $moodle,
-  ssl             => true,
-  ssl_cert        => $moodle_ssl_cert,
-  ssl_key         => $moodle_ssl_key,
-  ip              => $moodle_ip,
-  port            => 443,
-  add_listen      => false,
-  docroot         => $moodle_root,
-  docroot_owner   => $www_user,
-  override        => ['All'],
-  rewrites        => [{}],
-  directories     => {
-    path => $moodle_root,
-  }
-}
+#apache::vhost { "$moodle-ssl":
+#  vhost_name      => $moodle,
+#  ssl             => true,
+#  ssl_cert        => $moodle_ssl_cert,
+#  ssl_key         => $moodle_ssl_key,
+#  ip              => $moodle_ip,
+#  port            => 443,
+#  add_listen      => false,
+#  docroot         => $moodle_root,
+#  docroot_owner   => $www_user,
+#  override        => ['All'],
+#  rewrites        => [{}],
+#  directories     => {
+#    path => $moodle_root,
+#  }
+#}
 
 apache::vhost { "$moodle-ssl":
   vhost_name      => $moodle,
@@ -120,7 +120,7 @@ file { '/etc/shibboleth/attribute-map.xml':
 # restart the shibd daemon. The Service['shibd'] is in  
 # puppet-shibboleth/manifests/init.pp
 
-Class['shibboleth'] -> File['/etc/shibboleth/attribute-map.xml'] ~> Service['shibd']
+File['shibboleth_conf_dir'] -> File['/etc/shibboleth/attribute-map.xml'] ~> Service['shibd']
 
 shibboleth::metadata{ 'federation_metadata':
   provider_uri  => 'https://aai.grnet.gr/metadata.xml',
